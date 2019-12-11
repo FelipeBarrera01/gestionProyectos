@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
+import {actualizarAvance} from '../funciones/avance';
 const tareas = document.querySelector('.listado-pendientes');
 
 if(tareas){
@@ -11,6 +12,7 @@ tareas.addEventListener('click', e =>{
         axios.patch(url,{idTarea}).then(function(respuesta){
             if (respuesta.status === 200) {
                 icono.classList.toggle('completo');
+                actualizarAvance();
             }
         });
     }
@@ -37,6 +39,7 @@ tareas.addEventListener('click', e =>{
                                     respuesta.data,
                                     'success'
                                 )
+                                actualizarAvance(); 
                             }
                         });
                       }
