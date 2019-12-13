@@ -5,6 +5,11 @@ res.render('crearCuenta',{
     nombrePagina: 'Crear cuenta en uptask'
 });
 }
+exports.formIniciarSesion = (req, res) =>{
+    res.render('iniciarSesion',{
+        nombrePagina: 'Iniciar Sesión en Uptask'
+    });
+    }
 exports.crearCuenta = async (req, res) => {
     const {email, password } = req.body;
     try {
@@ -14,9 +19,12 @@ exports.crearCuenta = async (req, res) => {
         });
         res.rediret('/iniciar-sesion');
     } catch (error) {
+            req.flash('error',error.errors.map(error => error.message) );
             res.render('crearCuenta', {
-                error: error.errors,
-                nombrePagina: 'Crear cuenta en Uptask'
+                error:req.flash() ,
+                nombrePagina: 'Crear cuenta en Uptask',
+                email,
+                password
             });
     }
    
