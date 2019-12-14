@@ -8,6 +8,7 @@ const helpers = require('./helpers');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const db = require('./config/db');
+const passport = require('./config/passport');
 require('./models/Proyectos');
 require('./models/Tareas');
 require('./models/Usuarios');
@@ -29,6 +30,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use((req, res, next) =>{
     res.locals.vardump = helpers.vardump;
     res.locals.mensajes = req.flash();

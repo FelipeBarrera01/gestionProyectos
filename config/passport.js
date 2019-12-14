@@ -11,14 +11,17 @@ passport.use(
         },
         async(email, password, done)=>{
             try {
-                const usuario = await Usuarios.find({
+                const usuario = await Usuarios.findOne({
                     where:{
                         email: email
                     }
                 });
                 if(!usuario.verificarPassword(password)){
-                    
+                    return done(null, false {
+                        message: 'Password incorrecto'
+                    })
                 }
+                return done(null, usuario)
             } catch (error) {
                 return done(null, false, {
                     message: 'Esa cuenta no existe '
@@ -27,3 +30,11 @@ passport.use(
         }
     )
 )
+passport.serializeUser((usuario, callback) =>{
+    callback(null, usuario);
+
+});
+passport.deserializeUser((usuario, callback)=>{
+    callback(null, usuario);
+})
+module.exports = passport;

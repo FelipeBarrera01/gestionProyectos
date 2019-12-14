@@ -6,8 +6,10 @@ res.render('crearCuenta',{
 });
 }
 exports.formIniciarSesion = (req, res) =>{
+    const {error} = res.locals.mensajes;
     res.render('iniciarSesion',{
-        nombrePagina: 'Iniciar Sesión en Uptask'
+        nombrePagina: 'Iniciar Sesión en Uptask',
+        error
     });
     }
 exports.crearCuenta = async (req, res) => {
