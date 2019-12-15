@@ -13,7 +13,8 @@ passport.use(
             try {
                 const usuario = await Usuarios.findOne({
                     where:{
-                        email: email
+                        email,
+                        activo: 1
                     }
                 });
                 if(!usuario.verificarPassword(password)){
